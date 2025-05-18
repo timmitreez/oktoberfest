@@ -1,0 +1,11 @@
+[project]
+name = "festzelt-service"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4==4.11.1",
+    "boto3>=1.38.13",
+    "requests==2.28.1",
+]

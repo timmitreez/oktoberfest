@@ -73,7 +73,7 @@ class Microservice:
                     match = True
                     break
 
-            if match:
+            if not match:
                 delta.append(entry)
 
         stack_last_run = stack

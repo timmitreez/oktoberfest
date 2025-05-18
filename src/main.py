@@ -25,8 +25,8 @@ class Microservice:
 
         log.info('started')
         current_vacancies = download()
-        #telegram_bot.send("Up and running")
-        #self.notify(current_vacancies["data"])
+        telegram_bot.send("Up and running")
+        self.notify(current_vacancies["data"])
         
 
     def notify(self, messages):

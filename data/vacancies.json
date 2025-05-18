@@ -1,0 +1,57 @@
+{
+    "last_state": "18.05.25 20:34:27",
+    "data": [
+        {
+            "Tent": "Schottenhamel",
+            "Option": "1. Montag, 22.09.2025 - Mittag ['Viktualienboxe', 'Münchner Kindl Boxe', 'Wirtsbuden Boxe', 'Balkon', 'Galerie', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "1. Dienstag, 23.09.2025 - Mittag ['Halle Süd/Mitte', 'Hallenboxe', 'Viktualienboxe', 'Hausboxe', 'Brauerei Boxe', 'Münchner Kindl Boxe', 'Traditionsboxe', 'Anstich Boxe', 'Bavaria Boxe', 'Prinzregenten Boxe', 'Wirtsbuden Boxe', 'Balkon', 'Galerie', 'Halle Nord', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "1. Mittwoch, 24.09.2025 - Mittag ['Halle Süd/Mitte', 'Hallenboxe', 'Viktualienboxe', 'Hausboxe', 'Brauerei Boxe', 'Münchner Kindl Boxe', 'Traditionsboxe', 'Anstich Boxe', 'Bavaria Boxe', 'Prinzregenten Boxe', 'Wirtsbuden Boxe', 'Balkon', 'Galerie', 'Halle Nord', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "1. Donnerstag, 25.09.2025 - Mittag ['Hallenboxe', 'Brauerei Boxe', 'Münchner Kindl Boxe', 'Bavaria Boxe', 'Balkon', 'Galerie', 'Halle Nord', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "2. Sonntag, 28.09.2025 - Mittag ['Galerie']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "2. Montag, 29.09.2025 - Mittag ['Halle Süd/Mitte', 'Hallenboxe', 'Viktualienboxe', 'Hausboxe', 'Brauerei Boxe', 'Münchner Kindl Boxe', 'Traditionsboxe', 'Anstich Boxe', 'Bavaria Boxe', 'Prinzregenten Boxe', 'Wirtsbuden Boxe', 'Balkon', 'Galerie', 'Halle Nord', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "2. Dienstag, 30.09.2025 - Mittag ['Halle Süd/Mitte', 'Hallenboxe', 'Viktualienboxe', 'Hausboxe', 'Brauerei Boxe', 'Münchner Kindl Boxe', 'Traditionsboxe', 'Anstich Boxe', 'Bavaria Boxe', 'Prinzregenten Boxe', 'Wirtsbuden Boxe', 'Balkon', 'Galerie', 'Halle Nord', 'Studentenboxe']"
+        },
+        {
+            "Tent": "Schottenhamel",
+            "Option": "2. Mittwoch, 01.10.2025 - Mittag ['Bavaria Boxe', 'Prinzregenten Boxe', 'Balkon', 'Galerie']"
+        },
+        {
+            "Tent": "Hackezelt",
+            "Option": "1. Montag, 22.09.2025 - Mittag ['Galerie', 'Seitenbox 2-11']"
+        },
+        {
+            "Tent": "Hackezelt",
+            "Option": "1. Dienstag, 23.09.2025 - Mittag ['Galerie', 'Seitenbox 2-11']"
+        },
+        {
+            "Tent": "Hackezelt",
+            "Option": "1. Mittwoch, 24.09.2025 - Mittag ['Galerie', 'Seitenbox 2-11']"
+        },
+        {
+            "Tent": "Hackezelt",
+            "Option": "2. Dienstag, 30.09.2025 - Mittag ['Galerie', 'Seitenbox 2-11', 'Innenraumbox']"
+        },
+        {
+            "Tent": "Hackezelt",
+            "Option": "2. Mittwoch, 01.10.2025 - Mittag ['Seitenbox 2-11']"
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 from datetime import datetime
 
 from bot import Bot
@@ -24,8 +25,8 @@ class Microservice:
 
         log.info('started')
         current_vacancies = download()
-        telegram_bot.send("Up and running")
-        self.notify(current_vacancies["data"])
+        #telegram_bot.send("Up and running")
+        #self.notify(current_vacancies["data"])
         
 
     def notify(self, messages):
@@ -90,8 +91,12 @@ class Microservice:
         log.info('________Run completed_______')
 
 
-def lambda_handler(event, context):
-    """ Lambda Web Scraper"""
+# Local Debugging
+if __name__ == "__main__":
+
+    # f = open("tests/event.json", "r")
+    # json.load(f)
+    # f.close()
 
     log.info("Looking for vacancies {} on {} ".format(
         str(DESIRED_TIMES), str(DESIRED_DAYS)))
@@ -100,19 +105,6 @@ def lambda_handler(event, context):
     ms = Microservice(telegram_bot)
 
     # run service
-    ms.run()
-
-    # Return to Amazon
-    return event
-
-
-# Local Debugging
-if __name__ == "__main__":
-
-    # f = open("tests/event.json", "r")
-    # json.load(f)
-    # f.close()
-
-    event = {}
-
-    lambda_handler(event, None)
+    while True:
+        ms.run()
+        time.sleep(5)   # 5 seconds

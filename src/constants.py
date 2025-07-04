@@ -43,5 +43,5 @@ HEADER_SCHUETZENZELT = {
 }
 
 BASE_URL_HACKERZELT = "https://api.festzelt-os.com/lp/guestlists"
-BASE_URL_SCHOTTENHAMEL = "https://api.schottenhamel.wiesn.airlst.com/lp/guestlists"
-BASE_URL_SCHUETZENZELT = "https://api.schuetzenfestzelt.wiesn-os.de/lp/guestlists"
+BASE_URL_SCHOTTENHAMEL = "https://schottenhamel-api.festzelt-os.com/lp/guestlists"
+BASE_URL_SCHUETZENZELT = "https://schuetzen-api.festzelt-os.com/lp/guestlists"

@@ -94,7 +94,8 @@ DEBUG=true
 Build the lambda-layer locally.
 
 ```sh
-docker build -f Dockerfile -t lambdalayer . 
+docker build -f Dockerfile -t oktoberfest . 
+docker run -d --env-file .env oktoberfest
 ```
 
 > If you are using `aws sso login` remember to call `aws sts get-caller-identity` after login for credential population.

@@ -5,7 +5,7 @@ import logging
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-DATA_PATH = os.environ.get("SESSION_STORAGE", "data/vacancies.json")
+DATA_PATH = os.getenv("SESSION_STORAGE", "data/vacancies.json")
 
 log.info("Using target filepath {}".format(DATA_PATH))
 

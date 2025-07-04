@@ -1,14 +1,48 @@
-# PYTHON DEPENDENCIES PACKER IMAGE
-FROM amazonlinux:2.0.20220719.0
+# Stage 1: Build and dependency installation
+FROM python:3.11-slim-bookworm AS builder
 
-# https://techviewleo.com/how-to-install-python-on-amazon-linux/
-RUN yum install -y amazon-linux-extras && \
-    yum install -y zip && \
-    amazon-linux-extras enable python3.8 && \
-    yum install -y python3.8 && \
-    yum clean all
+SHELL ["sh", "-exc"]
 
-COPY src/requirements.txt /requirements.txt
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=utf-8 \
+    UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_PYTHON=python3.11 \
+    UV_PROJECT_ENVIRONMENT=/app/.venv
 
-RUN pip3.8 install -r requirements.txt -t ./python && \
-    zip -r python.zip ./python/
+# Install system dependencies such as git, curl etc.
+RUN apt-get update -qy \
+    && apt-get install -qyy \
+        -o APT::Install-Recommends=false \
+        -o APT::Install-Suggests=false \
+        git \
+        curl \
+        usbip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install UV
+ADD https://astral.sh/uv/${UV_VERSION}/install.sh /uv-installer.sh
+RUN chmod -R 655 /uv-installer.sh && /uv-installer.sh && rm /uv-installer.sh
+ENV PATH="/root/.local/bin/:$PATH"
+
+COPY pyproject.toml /app/pyproject.toml
+COPY README.md /app/README.md
+
+WORKDIR /app
+COPY src/. /app/src
+# Install the engine-runtime dependencies
+RUN --mount=type=cache,target=/root/.cache \
+    --mount=type=bind,source=uv.lock,target=/app/uv.lock \
+    uv venv /app/.venv \
+    && uv sync \
+    --frozen \
+    --compile-bytecode \
+    --no-dev \
+    --no-install-project
+
+COPY data/. /app/data
+
+CMD ["/app/.venv/bin/python", "src/main.py"]

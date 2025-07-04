@@ -1,0 +1,51 @@
+# This docker compose is the most minimal configuration to run the engine-runtime service
+# TODO: It requires a kafka service to be running, this should be changed
+name: "engine-runtime"
+services:
+  executor:
+    container_name: executor
+    image: local-runtime:latest
+    hostname: executor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      [
+        "-m",
+        "engine_runtime.services.executor.src.runtime_manager",
+        "--config_path=local_exec_configs/test/test_mission_plan_stepping.json"
+      ]
+    ports:
+      - 5678:5678
+      - 50051:50051
+      - 50052:50052
+      - 6006:6006 # Tensorboard
+    env_file:
+      - .env
+    networks:
+      - dmi-labs-simulation
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UV_INDEX_GITLAB_PASSWORD: ${UV_INDEX_GITLAB_PASSWORD} 
+  oraculo:
+    container_name: oraculo
+    image: local-runtime:latest
+    hostname: oraculo
+    command:
+      [
+        "-m",
+        "engine_runtime.services.oraculo.src.oraculo",
+        "--config_path=local_exec_configs/test/test_mission_plan_stepping.json"
+      ]
+    ports:
+      - 8010:8010
+      - 5679:5679
+    env_file:
+      - .env
+    networks:
+      - dmi-labs-simulation
+networks:
+  dmi-labs-simulation:
+    name: dmi-labs-simulation
+    driver: bridge

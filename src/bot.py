@@ -11,8 +11,8 @@ class Bot():
         """Prepare Telegram Webhook Connection
         """
 
-        self.token = os.environ["TELEGRAM_TOKEN"]
-        self.channel = os.environ["TELEGRAM_CHANNEL"]
+        self.token = os.getenv("TELEGRAM_TOKEN")
+        self.channel = os.getenv("TELEGRAM_CHANNEL")
         self.url = "https://api.telegram.org/bot{}/".format(self.token)
 
     def send(self, message):

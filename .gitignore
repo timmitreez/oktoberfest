@@ -194,7 +194,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-data/**
+
 logs
 .ropeproject
 .DS_Store

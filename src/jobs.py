@@ -2,27 +2,26 @@ import os
 from fnmatch import fnmatch
 import requests
 from bs4 import BeautifulSoup
-
 import logging
-
 from constants import HEADER_HACKERZELT, HEADER_SCHOTTENHAMEL, HEADER_SCHUETZENZELT, BASE_URL_HACKERZELT, BASE_URL_SCHOTTENHAMEL, BASE_URL_SCHUETZENZELT
 
-log = logging.getLogger(__name__)
 
-DESIRED_TIMES = os.environ.get(
-    "DESIRED_TIMES", "Mittag, Nachmittag").replace(" ", "").split(",")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-DESIRED_DAYS = os.environ.get(
-    "DESIRED_DAYS", "Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag").replace(" ", "").split(",")
+def get_env_list(key: str, default: str) -> list[str]:
+    raw = os.getenv(key, default)
+    cleaned = [v for v in raw.replace(" ", "").split(",") if v]
+    if not cleaned:
+        logger.warning(f"Environment variable '{key}' is set incorrectly or empty. Default used: '{default}'")
+    return cleaned
 
-DESIRED_SEATING_SCHOTTENHAMEL = os.environ.get(
-    "DESIRED_SEATING_SCHOTTENHAMEL", "*").replace(" ", "").split(",")
+DESIRED_TIMES = get_env_list("DESIRED_TIMES", "Mittag,Nachmittag")
+DESIRED_DAYS = get_env_list("DESIRED_DAYS", "Montag,Dienstag,Mittwoch,Donnerstag,Freitag,Samstag,Sonntag")
+DESIRED_SEATING_SCHOTTENHAMEL = get_env_list("DESIRED_SEATING_SCHOTTENHAMEL", "*")
+DESIRED_SEATING_SCHUETZENZELT = get_env_list("DESIRED_SEATING_SCHUETZENZELT", "*")
+DESIRED_SEATING_HACKERZELT = get_env_list("DESIRED_SEATING_HACKERZELT", "*")
 
-DESIRED_SEATING_SCHUETZENZELT = os.environ.get(
-    "DESIRED_SEATING_SCHUETZENZELT", "*").replace(" ", "").split(",")
-
-DESIRED_SEATING_HACKERZELT = os.environ.get(
-    "DESIRED_SEATING_HACKERZELT", "*").replace(" ", "").split(",")
 
 
 def api_call(url, headers):
@@ -99,14 +98,14 @@ def crawl_tent(name, url, headers):
     Returns:
         [{dict}] -- Found available vacancies
     """
-    log.info("Find {} vacancies".format(name))
+    logger.info("Find {} vacancies".format(name))
     options = []
 
     try:
         date_options = api_call(headers=headers, url=url)
 
         for date_option in date_options:
-            log.debug(date_option["name"])
+            logger.debug(date_option["name"])
 
             # Filter the bad ones
             for target_time in DESIRED_TIMES:
@@ -123,10 +122,10 @@ def crawl_tent(name, url, headers):
                             options.append(
                                 {"Tent": name, "Option": "{} {}".format(date_option["name"], str(seat_options))})
 
-        log.info("Found {} vacancies".format(str(len(options))))
+        logger.info("Found {} vacancies".format(str(len(options))))
 
     except:
-        log.warning("Crawling failed")
+        logger.warning("Crawling failed")
         options.append({"Tent": name, "Option": "Crawling Failed"})
         pass
 

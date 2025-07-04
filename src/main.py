@@ -48,7 +48,7 @@ class Microservice:
         log.info('________Run started_______')
 
         # read in the vacancies already known, if existing
-        storage_path = os.environ["SESSION_STORAGE"]
+        storage_path = os.getenv("SESSION_STORAGE")
 
         download()
 
